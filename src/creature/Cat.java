@@ -1,5 +1,7 @@
 package creature;
 
+import java.text.MessageFormat;
+
 public class Cat extends Creature {
 
     /**
@@ -18,6 +20,6 @@ public class Cat extends Creature {
      */
     @Override
     public String toString() {
-        return "Cat " + super.toString();
+        return MessageFormat.format("Cat {0}", super.toString());
     }
 }

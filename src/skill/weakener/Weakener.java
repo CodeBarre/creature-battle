@@ -3,6 +3,8 @@ package skill.weakener;
 import creature.Creature;
 import skill.Skill;
 
+import java.text.MessageFormat;
+
 public abstract class Weakener extends Skill {
 
     private final String statTarget;
@@ -31,12 +33,12 @@ public abstract class Weakener extends Skill {
             // if the stat targeted is attack
             case "attack" -> {
                 target.weakenAttack(value);
-                System.out.println(user.getName() + " used " + name + " on " + target.getName() + " and weakened their attack by " + value + ". " + target.getName() + " now has " + target.getAttack() + " attack. \n");
+                System.out.println(MessageFormat.format("{0} used {1} on {2} and weakened their attack by {3}. {4} now has {5} attack.", user.getName(), name, target.getName(), value, target.getName(), target.getAttack()));
             }
             // if the stat targeted is defense
             case "defense" -> {
                 target.weakenDefense(value);
-                System.out.println(user.getName() + " used " + name + " on " + target.getName() + " and weakened their defense by " + value + ". " + target.getName() + " now has " + target.getDefense() + " defense. \n");
+                System.out.println(MessageFormat.format("{0} used {1} on {2} and weakened their defense by {3}. {4} now has {5} defense.", user.getName(), name, target.getName(), value, target.getName(), target.getDefense()));
             }
         }
     }

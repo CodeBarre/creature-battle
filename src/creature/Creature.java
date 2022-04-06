@@ -2,6 +2,7 @@ package creature;
 
 import skill.Skill;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public abstract class Creature {
      */
     @Override
     public String toString() {
-        return this.name + ": " + this.health + "/" + this.maxHealth + " HP, " + this.lives + " lives \n";
+        return MessageFormat.format("{0}: {1}/{2} HP - {3} lives", this.name, this.health, this.maxHealth, this.lives);
     }
 
     /**
@@ -68,6 +69,16 @@ public abstract class Creature {
      */
     public int getHealth() {
         return health;
+    }
+
+
+    /**
+     * Returns the amount of lives the creature has.
+     *
+     * @return The amount of lives the creature has.
+     */
+    public int getLives() {
+        return lives;
     }
 
     /**
@@ -191,6 +202,7 @@ public abstract class Creature {
      */
     public void learn(Skill skill) {
         this.skills.add(skill);
+        System.out.println(MessageFormat.format("{0} learned {1}!", this.getName(), skill.getName()));
     }
 
     /**

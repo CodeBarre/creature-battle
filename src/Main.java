@@ -5,6 +5,7 @@ import skill.damage.Fireball;
 import skill.heal.FlowerBless;
 import skill.weakener.CurseOfTheMoon;
 
+import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -12,52 +13,50 @@ public class Main {
         // initialize the variables
         Scanner scanner = new Scanner(System.in);
 
-        // create a dragon
-        System.out.println("Enter the dragon's name: ");
+        // initialize the creatures
+        // initialize the dragon
+        System.out.println("Enter the name of the dragon: ");
         Dragon dragon = new Dragon(scanner.nextLine());
-        System.out.print("Dragon created: " + dragon + "\n");
+        System.out.println("Dragon created! " + dragon);
 
-        // learn the dragon's skills
-        dragon.learn(new CurseOfTheMoon());
-        System.out.println(dragon.getName() + " learned: " + dragon.getSkills().get(0).getName() + "\n");
-        dragon.learn(new Fireball());
-        System.out.println(dragon.getName() + " learned: " + dragon.getSkills().get(1).getName() + "\n");
-
-        // create a cat and learn him some skills
-        System.out.println("Enter the cat's name: ");
+        // initialize the cat
+        System.out.println("Enter the name of the cat: ");
         Cat cat = new Cat(scanner.nextLine());
-        System.out.print("Cat created: " + cat + "\n");
+        System.out.println("Cat created! " + cat);
 
-        // learn the cat's skills
-        cat.learn(new FlowerBless());
-        System.out.println(cat.getName() + " learned: " + cat.getSkills().get(0).getName() + "\n");
-        cat.learn(new SunlightPower());
-        System.out.println(cat.getName() + " learned: " + cat.getSkills().get(1).getName() + "\n");
+        // initialize the skills and add them to the creatures
+        // learn skills to the dragon
+        Fireball fireball = new Fireball();
+        dragon.learn(fireball);
+        CurseOfTheMoon curseOfTheMoon = new CurseOfTheMoon();
+        dragon.learn(curseOfTheMoon);
 
-        // start of the battle
-        System.out.println("\n Let's fight! \n");
+        // learn skills to the cat
+        SunlightPower sunlightPower = new SunlightPower();
+        cat.learn(sunlightPower);
+        FlowerBless flowerBless = new FlowerBless();
+        cat.learn(flowerBless);
 
-        for (int i = 1; i < 6; i++) {
-            // announce the round
-            System.out.println("Turn " + i + "\n");
-            // dragon's turn
-            System.out.println("Dragon's turn: \n");
+        // fight
+        int turn = 1;
+        while (dragon.isAlive() && cat.isAlive()) {
+            System.out.println("\n\nTurn " + turn);
+            System.out.println(dragon + " vs " + cat + "\n");
+            //TimeUnit.MILLISECONDS.sleep(100);
             dragon.getSkills().get(0).use(dragon, cat);
-            // cat's turn
-            System.out.println("Cat's turn: \n");
-            cat.getSkills().get(0).use(cat, dragon);
-            // info on the battle
-            System.out.println("State of the dragon: " + dragon + "\n");
-            System.out.println("State of the cat: " + cat + "\n");
-            i++;
-            // repeat the round
-            System.out.println("Turn " + i + "\n");
-            System.out.println("Dragon's turn: \n");
-            dragon.getSkills().get(1).use(dragon, cat);
-            System.out.println("Cat's turn: \n");
-            cat.getSkills().get(1).use(cat, dragon);
-            System.out.println("State of the dragon: " + dragon + "\n");
-            System.out.println("State of the cat: " + cat + "\n");
+            //TimeUnit.MILLISECONDS.sleep(500);
+            if (cat.isAlive()) {
+                cat.getSkills().get(1).use(cat, dragon);
+                //TimeUnit.MILLISECONDS.sleep(500);
+            }
+            turn++;
+        }
+
+        // end of the fight
+        if (dragon.isAlive()) {
+            System.out.println(MessageFormat.format("{0} wins!", dragon.getName()));
+        } else {
+            System.out.println(MessageFormat.format("{0} wins!", cat.getName()));
         }
     }
 }

@@ -3,6 +3,8 @@ package skill.boost;
 import creature.Creature;
 import skill.Skill;
 
+import java.text.MessageFormat;
+
 public abstract class Boost extends Skill {
 
     private final String statTarget;
@@ -30,12 +32,12 @@ public abstract class Boost extends Skill {
             // if the stat targeted is attack
             case "attack" -> {
                 user.boostAttack(value);
-                System.out.println(user.getName() + " used " + this.getName() + " and has been boosted in attack by " + value + ". His attack is now " + user.getAttack() + ".\n");
+                System.out.println(MessageFormat.format("{0} used {1} and has been boosted in attack by {2}. His attack is now {3}.", user.getName(), this.getName(), value, user.getAttack()));
             }
             // if the stat targeted is defense
             case "defense" -> {
                 user.boostDefense(value);
-                System.out.println(user.getName() + " used " + this.getName() + " and has been boosted in defense by " + value + ". His defense is now " + user.getDefense() + ".\n");
+                System.out.println(MessageFormat.format("{0} used {1} and has been boosted in defense by {2}. His defense is now {3}.", user.getName(), this.getName(), value, user.getDefense()));
             }
         }
     }
