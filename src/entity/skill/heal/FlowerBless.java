@@ -1,4 +1,4 @@
-package skill.heal;
+package entity.skill.heal;
 
 public class FlowerBless extends Heal {
 

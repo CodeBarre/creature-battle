@@ -1,4 +1,4 @@
-package skill.boost;
+package entity.skill.boost;
 
 public class SunlightPower extends Boost {
 

@@ -1,7 +1,7 @@
-package skill.boost;
+package entity.skill.boost;
 
-import creature.Creature;
-import skill.Skill;
+import entity.creature.Creature;
+import entity.skill.Skill;
 
 import java.text.MessageFormat;
 

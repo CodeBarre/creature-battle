@@ -1,7 +1,7 @@
-package skill;
+package entity.skill;
 
-import creature.Creature;
-import interfaces.Describable;
+import entity.creature.Creature;
+import util.Describable;
 
 public abstract class Skill implements Describable {
     protected final String name;

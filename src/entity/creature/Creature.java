@@ -1,7 +1,7 @@
-package creature;
+package entity.creature;
 
-import interfaces.Describable;
-import skill.Skill;
+import entity.skill.Skill;
+import util.Describable;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class Creature implements Comparable<Creature>, Describable {
     protected final String name; // Name of the creature
     protected final int maxHealth; // Maximum health points
-    protected int lives; // Number of lives
+    protected int lives; // Amount lives
     protected int health; // Current health points
     protected int attack; // Attack points
     protected int defense;  // Defense points
@@ -21,7 +21,7 @@ public abstract class Creature implements Comparable<Creature>, Describable {
      *
      * @param name      The name of the creature.
      * @param maxHealth The maximum health points of the creature.
-     * @param lives     The number of lives the creature has.
+     * @param lives     The amount lives the creature has.
      * @param attack    The attack points of the creature.
      * @param defense   The defense points of the creature.
      */

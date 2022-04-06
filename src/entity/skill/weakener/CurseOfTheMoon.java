@@ -1,4 +1,4 @@
-package skill.weakener;
+package entity.skill.weakener;
 
 public class CurseOfTheMoon extends Weakener {
 

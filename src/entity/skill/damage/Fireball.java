@@ -1,4 +1,4 @@
-package skill.damage;
+package entity.skill.damage;
 
 public class Fireball extends Damage {
 

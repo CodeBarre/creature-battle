@@ -1,7 +1,7 @@
-package skill.heal;
+package entity.skill.heal;
 
-import creature.Creature;
-import skill.Skill;
+import entity.creature.Creature;
+import entity.skill.Skill;
 
 import java.text.MessageFormat;
 
@@ -30,7 +30,7 @@ public abstract class Heal extends Skill {
         // heal the user
         user.setHealth(user.getHealth() + value);
 
-        // If the health is greater than the max health, set it to the max health
+        // If the health is greater than the max health, set it to the max health.
         boolean healedAtMaxHealth = false;
         if (user.getHealth() > user.getMaxHealth()) {
             user.setHealth(user.getMaxHealth());

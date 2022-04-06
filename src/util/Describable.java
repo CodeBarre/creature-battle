@@ -1,4 +1,4 @@
-package interfaces;
+package util;
 
 public interface Describable {
     void describe();

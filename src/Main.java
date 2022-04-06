@@ -1,9 +1,9 @@
-import creature.Cat;
-import creature.Dragon;
-import skill.boost.SunlightPower;
-import skill.damage.Fireball;
-import skill.heal.FlowerBless;
-import skill.weakener.CurseOfTheMoon;
+import entity.creature.Cat;
+import entity.creature.Dragon;
+import entity.skill.boost.SunlightPower;
+import entity.skill.damage.Fireball;
+import entity.skill.heal.FlowerBless;
+import entity.skill.weakener.CurseOfTheMoon;
 
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class Main {
         System.out.println("Cat created! " + cat);
 
         // initialize the skills and add them to the creatures
-        // learn skills to the dragon
+        // learn skills to the dragon.
         Fireball fireball = new Fireball();
         dragon.learn(fireball);
         CurseOfTheMoon curseOfTheMoon = new CurseOfTheMoon();

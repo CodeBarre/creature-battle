@@ -1,7 +1,7 @@
-package skill.damage;
+package entity.skill.damage;
 
-import creature.Creature;
-import skill.Skill;
+import entity.creature.Creature;
+import entity.skill.Skill;
 
 import java.text.MessageFormat;
 
@@ -31,7 +31,7 @@ public abstract class Damage extends Skill {
         // attack the target
         int damageInflicted = user.attack(target, this);
 
-        // if the target died or lost a life, print a different message
+        // if the target died or lost a life, print a different message.
         if (user.getAttack() * value / target.getDefense() >= oldHealth) {
             if (target.getLives() <= 0) {
                 System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} lost a life and has no lives remaining!", user.getName(), this.getName(), target.getName(), target.getName(), damageInflicted, target.getName(), target.getName()));

@@ -1,4 +1,4 @@
-package creature;
+package entity.creature;
 
 import java.text.MessageFormat;
 
