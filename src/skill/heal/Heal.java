@@ -28,14 +28,24 @@ public abstract class Heal extends Skill {
         int oldHealth = user.getHealth();
 
         // heal the user
-        user.heal(value);
+        user.setHealth(user.getHealth() + value);
 
-        // if the user's health is at his maximum, show the difference between the max and old health as the amount healed
-        if ((oldHealth + value) > user.getMaxHealth()) {
-            System.out.println(MessageFormat.format("{0} used {1} and healed {2} health. {3} now has {4} HP (max).", user.getName(), name, user.getMaxHealth() - oldHealth, user.getName(), user.getHealth()));
-            // else, show the amount healed
+        // If the health is greater than the max health, set it to the max health
+        boolean healedAtMaxHealth = false;
+        if (user.getHealth() > user.getMaxHealth()) {
+            user.setHealth(user.getMaxHealth());
+            int healAmount = user.getMaxHealth() - oldHealth;
+            System.out.println(MessageFormat.format("{0} used {1} and healed {2} health. {3} now has {4} HP.", user.getName(), name, healAmount, user.getName(), user.getHealth()));
         } else {
             System.out.println(MessageFormat.format("{0} used {1} and healed {2} health. {3} now has {4} HP.", user.getName(), name, value, user.getName(), user.getHealth()));
         }
+    }
+
+    /**
+     * Describes the skill
+     */
+    @Override
+    public void describe() {
+        System.out.println(MessageFormat.format("{0} heals the user for {1} HP.", name, value));
     }
 }

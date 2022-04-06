@@ -32,14 +32,22 @@ public abstract class Weakener extends Skill {
         switch (statTarget) {
             // if the stat targeted is attack
             case "attack" -> {
-                target.weakenAttack(value);
+                target.setAttack(target.getAttack() - getValue());
                 System.out.println(MessageFormat.format("{0} used {1} on {2} and weakened their attack by {3}. {4} now has {5} attack.", user.getName(), name, target.getName(), value, target.getName(), target.getAttack()));
             }
             // if the stat targeted is defense
             case "defense" -> {
-                target.weakenDefense(value);
+                target.setDefense(target.getDefense() - getValue());
                 System.out.println(MessageFormat.format("{0} used {1} on {2} and weakened their defense by {3}. {4} now has {5} defense.", user.getName(), name, target.getName(), value, target.getName(), target.getDefense()));
             }
         }
+    }
+
+    /**
+     * Describes the skill
+     */
+    @Override
+    public void describe() {
+        System.out.println(MessageFormat.format("{0} will weaken the target''s {1} by {2}", name, statTarget, value));
     }
 }

@@ -5,7 +5,6 @@ import skill.damage.Fireball;
 import skill.heal.FlowerBless;
 import skill.weakener.CurseOfTheMoon;
 
-import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -37,7 +36,14 @@ public class Main {
         FlowerBless flowerBless = new FlowerBless();
         cat.learn(flowerBless);
 
-        // fight
+        fireball.describe();
+        flowerBless.describe();
+        sunlightPower.describe();
+        curseOfTheMoon.describe();
+        cat.describe();
+        dragon.describe();
+
+        /*// fight
         int turn = 1;
         while (dragon.isAlive() && cat.isAlive()) {
             System.out.println("\n\nTurn " + turn);
@@ -57,6 +63,6 @@ public class Main {
             System.out.println(MessageFormat.format("{0} wins!", dragon.getName()));
         } else {
             System.out.println(MessageFormat.format("{0} wins!", cat.getName()));
-        }
+        }*/
     }
 }

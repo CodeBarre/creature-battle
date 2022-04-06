@@ -31,14 +31,22 @@ public abstract class Boost extends Skill {
         switch (statTarget) {
             // if the stat targeted is attack
             case "attack" -> {
-                user.boostAttack(value);
+                user.setAttack(user.getAttack() + value);
                 System.out.println(MessageFormat.format("{0} used {1} and has been boosted in attack by {2}. His attack is now {3}.", user.getName(), this.getName(), value, user.getAttack()));
             }
             // if the stat targeted is defense
             case "defense" -> {
-                user.boostDefense(value);
+                user.setDefense(user.getDefense() + value);
                 System.out.println(MessageFormat.format("{0} used {1} and has been boosted in defense by {2}. His defense is now {3}.", user.getName(), this.getName(), value, user.getDefense()));
             }
         }
+    }
+
+    /**
+     * Describes the skill.
+     */
+    @Override
+    public void describe() {
+        System.out.println(MessageFormat.format("{0} will boost the user''s {1} by {2}", name, statTarget, value));
     }
 }

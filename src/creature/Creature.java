@@ -1,19 +1,20 @@
 package creature;
 
+import interfaces.Describable;
 import skill.Skill;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Creature {
-    protected String name; // Name of the creature
-    protected int maxHealth; // Maximum health points
+public abstract class Creature implements Comparable<Creature>, Describable {
+    protected final String name; // Name of the creature
+    protected final int maxHealth; // Maximum health points
     protected int lives; // Number of lives
     protected int health; // Current health points
     protected int attack; // Attack points
     protected int defense;  // Defense points
-    protected List<Skill> skills; // List of skills that the creature can use
+    protected final List<Skill> skills; // List of skills that the creature can use
 
     /**
      * Creates a new creature with the given name, max health, attack, defense, and lives.
@@ -100,27 +101,55 @@ public abstract class Creature {
     }
 
     /**
+     * Set the amount of HP of the creature
+     *
+     * @param health The amount of HP to set
+     */
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    /**
+     * Set the amount of attack points of the creature
+     *
+     * @param attack The amount of attack points to set
+     */
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    /**
+     * Sets the amount of defense points of the creature.
+     *
+     * @param defense The amount of defense points to set
+     */
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    /**
      * Attacks the given creature.
      *
      * @param target The creature to attack.
      * @param skill  The skill that the creature used.
+     * @return The amount of damage the creature did.
      */
-    public void attack(Creature target, Skill skill) {
-        target.takeDamage(this.attack, skill);
+    public int attack(Creature target, Skill skill) {
+        return target.takeDamage(this.attack * skill.getValue());
     }
 
     /**
      * Calculates the damage that the creature will take and updates the health points accordingly.
      *
-     * @param attack The attack points of the other creature.
-     * @param skill  The skill that the other creature used.
+     * @param damage The amount of damage to inflict.
+     * @return The amount of damage that the creature took.
      */
-    public void takeDamage(int attack, Skill skill) {
-        int damage = attack * skill.getValue() / this.defense;
+    public int takeDamage(int damage) {
 
+        int damageTaken = damage / this.defense;
         // If the damage is negative, set it to 0
-        if (damage > 0) {
-            this.health -= damage;
+        if (damageTaken > 0) {
+            this.health -= damageTaken;
         }
 
         // If the creature is dead, remove a life
@@ -135,55 +164,7 @@ public abstract class Creature {
                 this.health = 0;
             }
         }
-    }
-
-    /**
-     * Boosts the attack points of the creature.
-     *
-     * @param boost The amount to boost the attack points by.
-     */
-    public void boostAttack(int boost) {
-        this.attack += boost;
-    }
-
-    /**
-     * Boosts the defense points of the creature.
-     *
-     * @param boost The amount to boost the defense points by.
-     */
-    public void boostDefense(int boost) {
-        this.defense += boost;
-    }
-
-    /**
-     * Weakens the attack points of the creature.
-     *
-     * @param weaken The amount to weaken the attack points by.
-     */
-    public void weakenAttack(int weaken) {
-        this.attack -= weaken;
-    }
-
-    /**
-     * Weakens the defense points of the creature.
-     *
-     * @param weaken The amount to weaken the defense points by.
-     */
-    public void weakenDefense(int weaken) {
-        this.defense -= weaken;
-    }
-
-    /**
-     * Heals the creature by the given amount.
-     *
-     * @param heal The amount to heal the creature by.
-     */
-    public void heal(int heal) {
-        this.health += heal;
-        // If the health is greater than the max health, set it to the max health
-        if (this.health > this.maxHealth) {
-            this.health = this.maxHealth;
-        }
+        return damageTaken;
     }
 
     /**
@@ -212,5 +193,28 @@ public abstract class Creature {
      */
     public List<Skill> getSkills() {
         return skills;
+    }
+
+    /**
+     * Compare the creatures by their attack points.
+     *
+     * @param creature The creature to compare to.
+     * @return < 0 if this creature has less attack points than the given creature, 0 if they have the same amount of attack points, and > 0 if this creature has more attack points than the given creature.
+     */
+    @Override
+    public int compareTo(Creature creature) {
+        return Integer.compare(this.getAttack(), creature.getAttack());
+    }
+
+    /**
+     * Describes the creature.
+     */
+    @Override
+    public void describe() {
+        System.out.println(MessageFormat.format("{0} has {1}/{2} HP, {3} attack, {4} defense, {5} lives left.", this.getName(), this.getHealth(), this.getMaxHealth(), this.getAttack(), this.getDefense(), this.getLives()));
+        System.out.println(MessageFormat.format("{0} knows the following skills:", this.getName()));
+        for (Skill skill : this.getSkills()) {
+            System.out.println(MessageFormat.format("\t- {0}", skill.getName()));
+        }
     }
 }

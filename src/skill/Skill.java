@@ -1,10 +1,11 @@
 package skill;
 
 import creature.Creature;
+import interfaces.Describable;
 
-public abstract class Skill {
-    protected String name;
-    protected int value;
+public abstract class Skill implements Describable {
+    protected final String name;
+    protected final int value;
 
     public Skill(String name, int value) {
         this.name = name;
@@ -26,6 +27,4 @@ public abstract class Skill {
      * @param target The target of the skill.
      */
     public abstract void use(Creature user, Creature target);
-
-
 }

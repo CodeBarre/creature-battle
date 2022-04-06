@@ -29,17 +29,25 @@ public abstract class Damage extends Skill {
         int oldHealth = target.getHealth();
 
         // attack the target
-        user.attack(target, this);
+        int damageInflicted = user.attack(target, this);
 
-        // if the target died, print a different message
+        // if the target died or lost a life, print a different message
         if (user.getAttack() * value / target.getDefense() >= oldHealth) {
             if (target.getLives() <= 0) {
-                System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} lost a life and has no lives remaining!", user.getName(), this.getName(), target.getName(), target.getName(), user.getAttack() * value / target.getDefense(), target.getName(), target.getName()));
+                System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} lost a life and has no lives remaining!", user.getName(), this.getName(), target.getName(), target.getName(), damageInflicted, target.getName(), target.getName()));
             } else {
-                System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} lost a life! {6} has {7} lives left.", user.getName(), this.getName(), target.getName(), target.getName(), user.getAttack() * value / target.getDefense(), target.getName(), target.getName(), target.getLives()));
+                System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} lost a life! {6} has {7} lives left.", user.getName(), this.getName(), target.getName(), target.getName(), damageInflicted, target.getName(), target.getName(), target.getLives()));
             }
         } else {
-            System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} has {6} HP left.", user.getName(), this.getName(), target.getName(), target.getName(), user.getAttack() * value / target.getDefense(), target.getName(), target.getHealth()));
+            System.out.println(MessageFormat.format("{0} used {1} on {2}. {3} took {4} damage. {5} has {6} HP left.", user.getName(), this.getName(), target.getName(), target.getName(), damageInflicted, target.getName(), target.getHealth()));
         }
+    }
+
+    /**
+     * Describes the skill.
+     */
+    @Override
+    public void describe() {
+        System.out.println(MessageFormat.format("{0} deals {1} damage to the target.", this.getName(), this.getValue()));
     }
 }
