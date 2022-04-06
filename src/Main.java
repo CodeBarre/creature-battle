@@ -1,10 +1,13 @@
-import entity.creature.Cat;
-import entity.creature.Dragon;
+import entity.Player;
+import entity.creature.Creature;
+import entity.creature.CreatureFactory;
+import entity.creature.CreatureType;
 import entity.skill.boost.SunlightPower;
 import entity.skill.damage.Fireball;
 import entity.skill.heal.FlowerBless;
 import entity.skill.weakener.CurseOfTheMoon;
 
+import java.text.MessageFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -15,23 +18,28 @@ public class Main {
         // initialize the creatures
         // initialize the dragon
         System.out.println("Enter the name of the dragon: ");
-        Dragon dragon = new Dragon(scanner.nextLine());
+        Creature dragon = CreatureFactory.create(CreatureType.DRAGON, scanner.nextLine());
         System.out.println("Dragon created! " + dragon);
 
         // initialize the cat
         System.out.println("Enter the name of the cat: ");
-        Cat cat = new Cat(scanner.nextLine());
+        Creature cat = CreatureFactory.create(CreatureType.CAT, scanner.nextLine());
         System.out.println("Cat created! " + cat);
+
+        Player.getInstance().adopt(dragon);
+        Player.getInstance().adopt(cat);
 
         // initialize the skills and add them to the creatures
         // learn skills to the dragon.
         Fireball fireball = new Fireball();
+        assert dragon != null;
         dragon.learn(fireball);
         CurseOfTheMoon curseOfTheMoon = new CurseOfTheMoon();
         dragon.learn(curseOfTheMoon);
 
         // learn skills to the cat
         SunlightPower sunlightPower = new SunlightPower();
+        assert cat != null;
         cat.learn(sunlightPower);
         FlowerBless flowerBless = new FlowerBless();
         cat.learn(flowerBless);
@@ -43,7 +51,7 @@ public class Main {
         cat.describe();
         dragon.describe();
 
-        /*// fight
+        // fight
         int turn = 1;
         while (dragon.isAlive() && cat.isAlive()) {
             System.out.println("\n\nTurn " + turn);
@@ -63,6 +71,6 @@ public class Main {
             System.out.println(MessageFormat.format("{0} wins!", dragon.getName()));
         } else {
             System.out.println(MessageFormat.format("{0} wins!", cat.getName()));
-        }*/
+        }
     }
 }
